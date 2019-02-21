@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import static java.util.Objects.requireNonNull;
+
 
 /**
  * This Utility has methods related to snackBars, creating appTheme specific SnackBar, error SnackBar<br/>
@@ -56,6 +58,8 @@ public final class SnackBarUtils {
                                               int duration,
                                               @ColorInt int backgroundColor,
                                               @ColorInt int textColor) {
+        requireNonNull(rootView);
+        requireNonNull(message);
         Snackbar snackbar = Snackbar.make(rootView, message, duration);
         snackbar.getView().setBackgroundColor(backgroundColor);
         TextView textView = snackbar.getView().findViewById(android.support.design.R.id.snackbar_text);
@@ -94,6 +98,7 @@ public final class SnackBarUtils {
      */
     public static void showLongSnackBar(@NonNull final Activity activity,
                                         @NonNull final String message) {
+        requireNonNull(activity);
         showCustomisedSnackBar(
                 ((ViewGroup) activity.findViewById(android.R.id.content))
                         .getChildAt(0),//gets the root view of the activity
@@ -115,6 +120,7 @@ public final class SnackBarUtils {
     public static void showLongSnackBar(@NonNull final Activity activity,
                                         @NonNull final String message,
                                         @ColorInt int backgroundColor) {
+        requireNonNull(activity);
         showCustomisedSnackBar(
                 ((ViewGroup) activity.findViewById(android.R.id.content))
                         .getChildAt(0),//gets the root view of the activity
@@ -138,6 +144,7 @@ public final class SnackBarUtils {
                                         @NonNull final String message,
                                         @ColorInt int backgroundColor,
                                         @ColorInt int textColor) {
+        requireNonNull(activity);
         showCustomisedSnackBar(
                 ((ViewGroup) activity.findViewById(android.R.id.content))
                         .getChildAt(0),//gets the root view of the activity
@@ -170,6 +177,7 @@ public final class SnackBarUtils {
     public static void showLongSnackBar(@NonNull final Activity activity,
                                         @StringRes int message,
                                         @ColorInt int backgroundColor) {
+        requireNonNull(activity);
         showCustomisedSnackBar(
                 ((ViewGroup) activity.findViewById(android.R.id.content))
                         .getChildAt(0),//gets the root view of the activity
@@ -193,6 +201,7 @@ public final class SnackBarUtils {
                                         @StringRes int message,
                                         @ColorInt int backgroundColor,
                                         @ColorInt int textColor) {
+        requireNonNull(activity);
         showCustomisedSnackBar(
                 ((ViewGroup) activity.findViewById(android.R.id.content))
                         .getChildAt(0),//gets the root view of the activity
@@ -215,6 +224,7 @@ public final class SnackBarUtils {
      * @param message  the message to be shown
      */
     public static void showShortSnackBar(@NonNull final Activity activity, @NonNull final String message) {
+        requireNonNull(activity);
         showCustomisedSnackBar(
                 ((ViewGroup) activity.findViewById(android.R.id.content))
                         .getChildAt(0),//gets the root view of teh activity
@@ -245,6 +255,7 @@ public final class SnackBarUtils {
      * @param message  the message to be shown
      */
     public static void showErrorBar(@NonNull final Activity activity, @NonNull final String message) {
+        requireNonNull(activity);
         showCustomisedSnackBar(
                 ((ViewGroup) activity.findViewById(android.R.id.content))
                         .getChildAt(0),//gets the root view of the activity

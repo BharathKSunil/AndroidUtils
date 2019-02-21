@@ -1,8 +1,11 @@
 package com.bharathksunil.utils;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.regex.Pattern;
+
+import static java.util.Objects.requireNonNull;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 public final class ValidationUtil {
@@ -81,6 +84,7 @@ public final class ValidationUtil {
      * @param regex the regular Expression
      */
     public static void setPasswordStrength(@NonNull final String regex) {
+        requireNonNull(regex);
         validPasswordRegex = Pattern.compile(regex);
     }
 
@@ -90,6 +94,7 @@ public final class ValidationUtil {
      * @param pattern the pattern for the strength of password
      */
     public static void setPasswordStrength(@NonNull final Pattern pattern) {
+        requireNonNull(pattern);
         validPasswordRegex = pattern;
     }
 
@@ -99,6 +104,7 @@ public final class ValidationUtil {
      * @param regex the regular expression
      */
     public static void setValidPhoneNumberRegex(@NonNull final String regex) {
+        requireNonNull(regex);
         validPhoneNumberRegex = Pattern.compile(regex);
     }
 
@@ -108,6 +114,7 @@ public final class ValidationUtil {
      * @param pattern the pattern for phone number validation
      */
     public static void setValidPhoneNumberRegex(@NonNull final Pattern pattern) {
+        requireNonNull(pattern);
         validPhoneNumberRegex = pattern;
     }
 
@@ -117,6 +124,7 @@ public final class ValidationUtil {
      * @param regex the regular expression
      */
     public static void setValidEmailAddressRegex(@NonNull final String regex) {
+        requireNonNull(regex);
         validEmailAddressRegex = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
     }
 
@@ -126,6 +134,7 @@ public final class ValidationUtil {
      * @param pattern the pattern for validation of emailID
      */
     public static void setValidEmailAddressRegex(@NonNull final Pattern pattern) {
+        requireNonNull(pattern);
         validEmailAddressRegex = pattern;
     }
     //endregion
@@ -137,6 +146,7 @@ public final class ValidationUtil {
      * @return true, if the email is syntactically valid
      */
     public static boolean isEmailValid(@NonNull final CharSequence email) {
+        requireNonNull(email);
         return validEmailAddressRegex.matcher(email).find();
     }
 
@@ -148,6 +158,7 @@ public final class ValidationUtil {
      * @return true, if the phone number is valid
      */
     public static boolean isPhoneNumberValid(@NonNull final CharSequence phone) {
+        requireNonNull(phone);
         return validPhoneNumberRegex.matcher(phone).find();
     }
 
@@ -161,6 +172,7 @@ public final class ValidationUtil {
      * @return true, if the password is strong and matches all criteria
      */
     public static boolean isPasswordStrong(@NonNull final CharSequence password) {
+        requireNonNull(password);
         return validPasswordRegex.matcher(password).find();
     }
 
@@ -172,7 +184,8 @@ public final class ValidationUtil {
      * @return true if the strings are equal
      */
     public static boolean areEqual(@NonNull final String firstString,
-                                   @NonNull final String secondString) {
+                                   @Nullable final String secondString) {
+        requireNonNull(firstString);
         return firstString.equals(secondString);
     }
 

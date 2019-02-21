@@ -1,5 +1,6 @@
 package com.bharathksunil.utils;
 
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.content.Context;
 import android.os.Build;
@@ -21,6 +22,8 @@ import java.util.List;
 
 import timber.log.Timber;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * @author Bharath Kumar S on 08-01-2018.
  */
@@ -39,6 +42,8 @@ public class ViewUtils {
      * @param scrollView the scrollview inside which the view is present
      */
     public static void focusOnView(@NonNull final View view, final @NonNull ScrollView scrollView) {
+        requireNonNull(view);
+        requireNonNull(scrollView);
         new Handler().post(() -> {
             try {
                 int vLeft = view.getLeft();
@@ -67,6 +72,7 @@ public class ViewUtils {
      * @param window the window corresponding to the activity that must be made as a popup.
      */
     public static void makePopupDisplay(@NonNull final Window window, float transparencyPercentage) {
+        requireNonNull(window);
         if (transparencyPercentage < 10.00f || transparencyPercentage > 100.00f)
             //Aggressive programming. notify the Developer that the value passed is invalid
             throw new IllegalArgumentException("The transparency amount passed must be between" +
@@ -91,6 +97,7 @@ public class ViewUtils {
      * @param views the multiple views to set visible
      */
     public static void setVisible(@NonNull final View... views) {
+        requireNonNull(views);
         for (View v : views) v.setVisibility(View.VISIBLE);
     }
 
@@ -101,6 +108,7 @@ public class ViewUtils {
      * @param views the multiple views to set visible
      */
     public static void setVisible(@NonNull final List<View> views) {
+        requireNonNull(views);
         for (View v : views) setVisible(v);
     }
 
@@ -110,6 +118,7 @@ public class ViewUtils {
      * @param views the multiple views to set invisible
      */
     public static void setInvisible(@NonNull final View... views) {
+        requireNonNull(views);
         for (View v : views) v.setVisibility(View.INVISIBLE);
     }
 
@@ -120,6 +129,7 @@ public class ViewUtils {
      * @param views the multiple views to set invisible
      */
     public static void setInvisible(@NonNull final List<View> views) {
+        requireNonNull(views);
         for (View v : views) setInvisible(v);
     }
 
@@ -129,6 +139,7 @@ public class ViewUtils {
      * @param views the multiple views to set gone
      */
     public static void setGone(@NonNull final View... views) {
+        requireNonNull(views);
         for (View v : views) {
             v.setVisibility(View.GONE);
         }
@@ -141,6 +152,7 @@ public class ViewUtils {
      * @param views the multiple views to set gone
      */
     public static void setGone(@NonNull final List<View> views) {
+        requireNonNull(views);
         for (View v : views) setGone(v);
     }
     //endregion
@@ -153,6 +165,7 @@ public class ViewUtils {
      * @param views the multiple views to be enabled
      */
     public static void setEnabled(@NonNull final View... views) {
+        requireNonNull(views);
         for (View v : views) v.setEnabled(true);
     }
 
@@ -163,6 +176,7 @@ public class ViewUtils {
      * @param views the multiple views to be enabled
      */
     public static void setEnabled(@NonNull final List<View> views) {
+        requireNonNull(views);
         for (View v : views) setEnabled(v);
     }
 
@@ -172,6 +186,7 @@ public class ViewUtils {
      * @param views the multiple views to be disabled
      */
     public static void setDisabled(@NonNull final View... views) {
+        requireNonNull(views);
         for (View v : views) v.setEnabled(false);
     }
 
@@ -182,6 +197,7 @@ public class ViewUtils {
      * @param views the multiple views to be disabled
      */
     public static void setDisabled(@NonNull final List<View> views) {
+        requireNonNull(views);
         for (View v : views) setDisabled(v);
     }
     //endregion
@@ -192,6 +208,7 @@ public class ViewUtils {
      * @param textInputLayouts the textInputLayout
      */
     public static void resetTextInputError(@NonNull final TextInputLayout... textInputLayouts) {
+        requireNonNull(textInputLayouts);
         for (TextInputLayout textInputLayout : textInputLayouts)
             textInputLayout.setError(null);
     }
@@ -203,18 +220,21 @@ public class ViewUtils {
      * @param textInputLayouts the multiple views to be disabled
      */
     public static void resetTextInputError(@NonNull final List<TextInputLayout> textInputLayouts) {
+        requireNonNull(textInputLayouts);
         for (TextInputLayout textInputLayout : textInputLayouts)
             resetTextInputError(textInputLayout);
     }
 
     /**
      * Use these methods to vibrate the device.<br/>
-     * <b>Note: </b> add the permission to Manifest
+     * <b>Note: </b> add the permission <uses-permission android:name="android.permission.VIBRATE" />to Manifest
      *
      * @param context      the context.
      * @param milliseconds the time the vibration must continue.
      */
+    @SuppressLint("MissingPermission")
     public static void vibrate(@NonNull final Context context, long milliseconds) {
+        requireNonNull(context);
         Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
         if (vibrator != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -239,6 +259,10 @@ public class ViewUtils {
                                                       @NonNull final String title,
                                                       @NonNull final String message,
                                                       @Nullable final AlertDialog.OnClickListener onClickListener) {
+        requireNonNull(context);
+        requireNonNull(title);
+        requireNonNull(message);
+
         AlertDialog.Builder builder;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             builder = new AlertDialog.Builder(context, android.R.style.Theme_Material_Light_Dialog_Alert);
@@ -261,6 +285,7 @@ public class ViewUtils {
      * @param view the view that must be animated
      */
     public static void slideOutToRight(@NonNull final View view) {
+        requireNonNull(view);
         TranslateAnimation animate = new TranslateAnimation(0, view.getWidth(), 0, 0);
         animate.setDuration(500);
         animate.setFillAfter(true);
@@ -289,6 +314,7 @@ public class ViewUtils {
      * @param view the view that must be animated
      */
     public static void slideOutToLeft(@NonNull final View view) {
+        requireNonNull(view);
         TranslateAnimation animate = new TranslateAnimation(0, -view.getWidth(), 0, 0);
         animate.setDuration(500);
         animate.setFillAfter(true);
@@ -317,6 +343,7 @@ public class ViewUtils {
      * @param view the view that must be animated
      */
     public static void slideOutToBottom(@NonNull final View view) {
+        requireNonNull(view);
         TranslateAnimation animate = new TranslateAnimation(0, 0, 0, view.getHeight());
         animate.setDuration(500);
         animate.setFillAfter(true);
@@ -345,6 +372,7 @@ public class ViewUtils {
      * @param view the view that must be animated
      */
     public static void slideOutToTop(@NonNull final View view) {
+        requireNonNull(view);
         TranslateAnimation animate = new TranslateAnimation(0, 0, 0, -view.getHeight());
         animate.setDuration(500);
         animate.setFillAfter(true);

@@ -15,6 +15,7 @@ import android.view.inputmethod.InputMethodManager;
 import timber.log.Timber;
 
 import static android.content.Context.CONNECTIVITY_SERVICE;
+import static java.util.Objects.requireNonNull;
 
 /**
  * <h>Utils</h>
@@ -41,6 +42,7 @@ public class Utils {
      * @return true if the app is connected to the internet
      */
     public static boolean isConnectedToTheNetwork(@NonNull Context context) {
+        requireNonNull(context);
         ConnectivityManager cManager = (ConnectivityManager) context.getSystemService(CONNECTIVITY_SERVICE);
         @SuppressLint("MissingPermission")
         NetworkInfo nInfo = cManager != null ? cManager.getActiveNetworkInfo() : null;
@@ -51,6 +53,8 @@ public class Utils {
     //todo: Move methods from here to appropriate classes
     public static boolean isPermissionGranted(@NonNull final Context context,
                                               @NonNull String permissionString) {
+        requireNonNull(context);
+        requireNonNull(permissionString);
         return Build.VERSION.SDK_INT < 23 || context.checkSelfPermission(permissionString)
                 == PackageManager.PERMISSION_GRANTED;
     }
@@ -62,6 +66,7 @@ public class Utils {
      */
     @SuppressWarnings("ConstantConditions")
     public static void hideKeyboard(@NonNull final Activity activity) {
+        requireNonNull(activity);
         try {
             InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
             inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
@@ -71,6 +76,7 @@ public class Utils {
     }
 
     public static boolean isHighAccuracyLocationEnabled(@NonNull Context context) {
+        requireNonNull(context);
         int locationMode;
         String locationProviders;
 

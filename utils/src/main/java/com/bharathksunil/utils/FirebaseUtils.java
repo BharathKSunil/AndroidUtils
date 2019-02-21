@@ -1,5 +1,9 @@
 package com.bharathksunil.utils;
 
+import android.support.annotation.NonNull;
+
+import static java.util.Objects.requireNonNull;
+
 /**
  * Use this utility to perform some generic operations related to firebase
  *
@@ -21,7 +25,8 @@ public class FirebaseUtils {
      * @param email the email address
      * @return the key safe of the email address
      */
-    public static String getEmailAsFirebaseKey(String email) {
+    public static String getEmailAsFirebaseKey(@NonNull String email) {
+        requireNonNull(email);
         email = email.toLowerCase();
         return email.replaceAll("\\.", DOT_REPLACEMENT);
     }
@@ -34,7 +39,8 @@ public class FirebaseUtils {
      * @param key the email which was stored as a key
      * @return the regular email ID
      */
-    public static String getEmailFromFirebaseKey(String key) {
+    public static String getEmailFromFirebaseKey(@NonNull String key) {
+        requireNonNull(key);
         return key.replaceAll(DOT_REPLACEMENT, "\\.").toLowerCase();
     }
 

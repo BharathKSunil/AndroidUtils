@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * Use this Utility to load fragments.
  *
@@ -38,6 +40,9 @@ public final class FragmentTransactionUtils {
                                        @NonNull final Fragment fragment, @IdRes int frame,
                                        @NonNull final String tag, boolean addToBackStack,
                                        @AnimRes int entryAnimationRes, @AnimRes int exitAnimationRes) {
+        requireNonNull(supportFragmentManager);
+        requireNonNull(fragment);
+        requireNonNull(tag);
         // This check is added to ensure we don't add the same fragment twice while the fragment is already added
         if (fragment.isAdded())
             return;
@@ -142,6 +147,9 @@ public final class FragmentTransactionUtils {
                                    @NonNull final Fragment fragment, @IdRes int frame,
                                    @NonNull final String tag, boolean addToBackStack,
                                    @AnimRes int entryAnimationRes, @AnimRes int exitAnimationRes) {
+        requireNonNull(supportFragmentManager);
+        requireNonNull(fragment);
+        requireNonNull(tag);
         // This check is added to ensure we don't add the same fragment twice while the fragment is already added
         if (fragment.isAdded())
             return;
@@ -237,6 +245,8 @@ public final class FragmentTransactionUtils {
      */
     public static void removeFragment(@NonNull final FragmentManager fragmentManager,
                                       @NonNull final Fragment fragment) {
+        requireNonNull(fragmentManager);
+        requireNonNull(fragment);
         if (fragment.isAdded() && !fragment.isRemoving())
             fragmentManager.beginTransaction().remove(fragment).commit();
     }
@@ -247,6 +257,7 @@ public final class FragmentTransactionUtils {
      * @param fragmentManager the Support fragment manager
      */
     public static void removeCurrentFragment(@NonNull final FragmentManager fragmentManager) {
+        requireNonNull(fragmentManager);
         fragmentManager.popBackStack();
     }
     //endregion

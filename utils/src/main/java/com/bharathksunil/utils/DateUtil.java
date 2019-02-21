@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 import timber.log.Timber;
 
 import static com.bharathksunil.utils.DateUtil.DateTimeUnits.MINUTES;
+import static java.util.Objects.requireNonNull;
 
 /**
  * A Utility for maintaining uniformity of date time storage
@@ -33,6 +34,7 @@ public class DateUtil {
      * @param datePattern a valid java date pattern.
      */
     public static void setDatePattern(@NonNull final String datePattern) {
+        requireNonNull(datePattern);
         DateUtil.datePattern = datePattern;
     }
 
@@ -43,6 +45,7 @@ public class DateUtil {
      * @param timeZone the timeZone that must be used for the app
      */
     public static void setTimeZone(@NonNull final String timeZone) {
+        requireNonNull(timeZone);
         DateUtil.timeZone = timeZone;
     }
 
@@ -53,6 +56,7 @@ public class DateUtil {
      * @return the formatted string of the date in the {@link #datePattern}
      */
     public static String getDateAsString(@NonNull final Date date) {
+        requireNonNull(date);
         return new SimpleDateFormat(datePattern, Locale.getDefault()).format(date);
     }
 
@@ -64,6 +68,7 @@ public class DateUtil {
      * @throws ParseException exception that occurred while passing the string as it is not a date.
      */
     public static Date getDateFromString(@NonNull final String date) throws ParseException {
+        requireNonNull(date);
         return new SimpleDateFormat(datePattern, Locale.getDefault()).parse(date);
     }
 
@@ -92,6 +97,9 @@ public class DateUtil {
     public static String getAbsoluteTimeDifference(@NonNull final Date timeOne,
                                                    @NonNull final Date timeTwo,
                                                    @NonNull final DateTimeUnits timeUnits) {
+        requireNonNull(timeOne);
+        requireNonNull(timeTwo);
+        requireNonNull(timeUnits);
         long diffInMs = Math.abs(timeOne.getTime() - timeTwo.getTime());
         int days = (int) TimeUnit.MILLISECONDS.toDays(diffInMs);
         int hours = (int) (TimeUnit.MILLISECONDS.toHours(diffInMs) - TimeUnit.DAYS.toHours(days));
@@ -127,6 +135,9 @@ public class DateUtil {
     public static String getAbsoluteTimeDifference(@NonNull final String timeOne,
                                                    @NonNull final String timeTwo,
                                                    @NonNull final DateTimeUnits timeUnits) {
+        requireNonNull(timeOne);
+        requireNonNull(timeTwo);
+        requireNonNull(timeUnits);
         try {
             Date firstDate = getDateFromString(timeOne);
             Date secondDate = getDateFromString(timeTwo);
@@ -150,6 +161,9 @@ public class DateUtil {
     public static String getTimeDifference(@NonNull final Date timeOne,
                                            @NonNull final Date timeTwo,
                                            @NonNull final DateTimeUnits timeUnits) {
+        requireNonNull(timeOne);
+        requireNonNull(timeTwo);
+        requireNonNull(timeUnits);
         long diffInMs = timeOne.getTime() - timeTwo.getTime();
         int days = (int) TimeUnit.MILLISECONDS.toDays(diffInMs);
         int hours = (int) (TimeUnit.MILLISECONDS.toHours(diffInMs) - TimeUnit.DAYS.toHours(days));
@@ -184,6 +198,9 @@ public class DateUtil {
     public static String getTimeDifference(@NonNull final String timeOne,
                                            @NonNull final String timeTwo,
                                            @NonNull final DateTimeUnits timeUnits) {
+        requireNonNull(timeOne);
+        requireNonNull(timeTwo);
+        requireNonNull(timeUnits);
         try {
             Date firstDate = getDateFromString(timeOne);
             Date secondDate = getDateFromString(timeTwo);
@@ -201,6 +218,7 @@ public class DateUtil {
      * @return true if the time has passed the currentTime
      */
     public static boolean isTimePast(@NonNull final String time) {
+        requireNonNull(time);
         long diff = 0;
         try {
             diff = Long.parseLong(getTimeDifference(
@@ -222,6 +240,7 @@ public class DateUtil {
      */
     @Nullable
     public static Long getTimestampFromDate(@NonNull final String date) {
+        requireNonNull(date);
         Date thisDate;
         try {
             thisDate = getDateFromString(date);
