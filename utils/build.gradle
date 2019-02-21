@@ -2,9 +2,10 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 28
-
-
-
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 28
@@ -17,7 +18,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -25,10 +26,25 @@ android {
 }
 
 dependencies {
+    def GoogleSupportVersion = '28.0.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'com.android.support:appcompat-v7:28.0.0'
+    //region Android Dependencies
+    implementation "com.android.support:design:$GoogleSupportVersion"
+    implementation "com.android.support:appcompat-v7:$GoogleSupportVersion"
+    implementation "com.android.support:support-v4:$GoogleSupportVersion"
+    //endregion
+
+    //region Test Dependencies
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    //endregion
+
+    //region Other Library Dependencies
+    implementation('com.squareup.picasso:picasso:2.71828') {
+        exclude group: 'com.android.support'
+    }
+    //endregion
+
 }
