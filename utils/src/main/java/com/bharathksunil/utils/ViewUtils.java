@@ -1,6 +1,5 @@
 package com.bharathksunil.utils;
 
-import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.content.Context;
 import android.os.Build;
@@ -20,14 +19,14 @@ import android.widget.ScrollView;
 
 import java.util.List;
 
+import timber.log.Timber;
+
 /**
  * @author Bharath Kumar S on 08-01-2018.
  */
 
 @SuppressWarnings({"unused", "WeakerAccess", "squid:S2209", "squid:S2440"})
 public class ViewUtils {
-
-    private static final Debug sDebug = new Debug(ViewUtils.class.getSimpleName());
 
     private ViewUtils() {
         //so that no instance is made
@@ -48,7 +47,7 @@ public class ViewUtils {
                 scrollView.smoothScrollTo(((vLeft + vRight - sWidth) / 2), view.getTop());
             } catch (Exception e) {
                 //defensive programming, suppress the error
-                ViewUtils.sDebug.e(" Utils.focusOnView : " + e.getMessage());
+                Timber.e(e);
             }
         });
     }
@@ -80,7 +79,7 @@ public class ViewUtils {
             window.setLayout(ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
         } catch (Exception e) {
             //defensive programming, suppress the error
-            sDebug.e("Utils.makePopupDisplay(): " + e.getMessage());
+            Timber.e(e);
         }
     }
 

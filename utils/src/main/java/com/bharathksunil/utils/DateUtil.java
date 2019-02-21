@@ -11,6 +11,8 @@ import java.util.Locale;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
+import timber.log.Timber;
+
 import static com.bharathksunil.utils.DateUtil.DateTimeUnits.MINUTES;
 
 /**
@@ -22,7 +24,6 @@ import static com.bharathksunil.utils.DateUtil.DateTimeUnits.MINUTES;
 public class DateUtil {
     private static String datePattern = "hh:mm:ss a, dd MMMM yyyy";
     private static String timeZone = "IST";
-    private static final Debug sDebug = new Debug(DateUtil.class.getSimpleName());
 
     /**
      * Initialise this in the Apps Application class's onCreate() and pass a valid date pattern you
@@ -131,7 +132,7 @@ public class DateUtil {
             Date secondDate = getDateFromString(timeTwo);
             return getAbsoluteTimeDifference(secondDate, firstDate, timeUnits);
         } catch (ParseException e) {
-            sDebug.e(DateUtil.class.getSimpleName() + ".getTimeDifferenceInMinutes(): " + e.getMessage());
+            Timber.e(e);
         }
         return "NA";
     }
@@ -188,7 +189,7 @@ public class DateUtil {
             Date secondDate = getDateFromString(timeTwo);
             return getTimeDifference(secondDate, firstDate, timeUnits);
         } catch (ParseException e) {
-            sDebug.e(DateUtil.class.getSimpleName() + ".getTimeDifferenceInMinutes(): " + e.getMessage());
+            Timber.e(e);
         }
         return "NA";
     }
@@ -208,7 +209,7 @@ public class DateUtil {
                     MINUTES
             ));
         } catch (ParseException e) {
-            sDebug.e(DateUtil.class.getSimpleName() + ".isTimePast(): " + e.getMessage());
+            Timber.e(e);
         }
         return diff > 0;
     }
@@ -225,7 +226,7 @@ public class DateUtil {
         try {
             thisDate = getDateFromString(date);
         } catch (ParseException e) {
-            sDebug.e(DateUtil.class.getSimpleName() + ".getTimestampFromDate(): " + e.getMessage());
+            Timber.e(e);
             return null;
         }
         return thisDate.getTime();

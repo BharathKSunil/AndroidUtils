@@ -12,6 +12,8 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.inputmethod.InputMethodManager;
 
+import timber.log.Timber;
+
 import static android.content.Context.CONNECTIVITY_SERVICE;
 
 /**
@@ -23,8 +25,6 @@ import static android.content.Context.CONNECTIVITY_SERVICE;
  */
 @SuppressWarnings({"unused", "WeakerAccess", "squid:S2209", "squid:S2440"})
 public class Utils {
-
-    private static final Debug sDebug = new Debug(Utils.class.getSimpleName());
 
     private Utils() {
 
@@ -66,7 +66,7 @@ public class Utils {
             InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
             inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
         } catch (Exception e) {
-            sDebug.e("Utils.hideKeyboard" + e.getMessage());
+            Timber.e(e);
         }
     }
 
