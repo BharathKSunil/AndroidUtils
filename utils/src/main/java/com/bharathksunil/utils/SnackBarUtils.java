@@ -2,12 +2,12 @@ package com.bharathksunil.utils;
 
 import android.app.Activity;
 import android.graphics.Color;
-import android.support.annotation.ColorInt;
-import android.support.annotation.ColorRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.core.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -62,7 +62,7 @@ public final class SnackBarUtils {
         requireNonNull(message);
         Snackbar snackbar = Snackbar.make(rootView, message, duration);
         snackbar.getView().setBackgroundColor(backgroundColor);
-        TextView textView = snackbar.getView().findViewById(android.support.design.R.id.snackbar_text);
+        TextView textView = snackbar.getView().findViewById(com.google.android.material.R.id.snackbar_text);
         textView.setTextColor(textColor);
         snackbar.show();
     }

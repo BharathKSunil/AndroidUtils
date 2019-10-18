@@ -1,6 +1,6 @@
 package com.bharathksunil.utils;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import static java.util.Objects.requireNonNull;
 
